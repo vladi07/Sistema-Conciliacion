@@ -52,6 +52,17 @@ class Centro
      */
     private $departamento;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Usuarios", mappedBy="centro")
+     */
+    private $usuarios;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CasoConciliatorio", mappedBy="centro")
+     */
+
+    private $casoConciliatorio;
+
     public function getId(): ?int
     {
         return $this->id;

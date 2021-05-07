@@ -94,6 +94,18 @@ class Persona
      */
     private $departamento;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Usuarios", mappedBy="persona")
+     */
+    private $usuarios;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UsuarioExterno", mappedBy="persona")
+     */
+    private $usuarioExterno;
+
+
     public function getId(): ?int
     {
         return $this->id;

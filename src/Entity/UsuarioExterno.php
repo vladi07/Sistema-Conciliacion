@@ -52,6 +52,12 @@ class UsuarioExterno
      */
     private $fechaCreacion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="usuarioExterno")
+     */
+    private $persona;
+
+
     public function getId(): ?int
     {
         return $this->id;

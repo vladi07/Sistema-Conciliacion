@@ -32,6 +32,12 @@ class Documentacion
      */
     private $ruta;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CasoConciliatorio", inversedBy="documentacion")
+     */
+    private $casoConciliatorio;
+
+
     public function getId(): ?int
     {
         return $this->id;

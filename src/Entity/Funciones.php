@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PermisosRepository;
+use App\Repository\FuncionesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PermisosRepository::class)
+ * @ORM\Entity(repositoryClass=FuncionesRepository::class)
  */
-class Permisos
+class Funciones
 {
     /**
      * @ORM\Id
@@ -18,24 +18,26 @@ class Permisos
     private $id;
 
     /**
-     * @ORM\Column(
-     *     type="string",
-     *     length=200,
-     *     nullable=false
-     * )
+     * @ORM\Column(type="string", length=150)
      */
     private $nombre;
 
     /**
-     * @ORM\Column(type="string", length=200, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $descripcion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuarios", inversedBy="funciones")
+     */
+    private $usuarios;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Funciones", inversedBy="permisos")
+     * @ORM\OneToMany(targetEntity="App\Entity\Permisos", mappedBy="funciones")
      */
-    private $funciones;
+    private $permisos;
+
+
 
 
     public function getId(): ?int
@@ -48,9 +50,10 @@ class Permisos
         return $this->nombre;
     }
 
-    public function setNombre(?string $nombre): self
+    public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
+
         return $this;
     }
 
@@ -62,6 +65,7 @@ class Permisos
     public function setDescripcion(?string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
         return $this;
     }
 }

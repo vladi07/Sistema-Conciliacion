@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CasoConciliatorioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,26 @@ class CasoConciliatorio
      * @ORM\Column(type="boolean")
      */
     private $estado;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Centro", inversedBy="casoConciliatorio")
+     */
+    private $centro;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Documentacion", mappedBy="casoConciliatorio")
+     */
+    private $documentacion;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Usuarios::class, mappedBy="casoConciliatorio")
+     */
+    private $usuarios;
+
+    public function __construct()
+    {
+        $this->usuarios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +159,33 @@ class CasoConciliatorio
     public function setEstado(bool $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Usuarios[]
+     */
+    public function getUsuarios(): Collection
+    {
+        return $this->usuarios;
+    }
+
+    public function addUsuario(Usuarios $usuario): self
+    {
+        if (!$this->usuarios->contains($usuario)) {
+            $this->usuarios[] = $usuario;
+            $usuario->addCasoConciliatorio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsuario(Usuarios $usuario): self
+    {
+        if ($this->usuarios->removeElement($usuario)) {
+            $usuario->removeCasoConciliatorio($this);
+        }
 
         return $this;
     }
