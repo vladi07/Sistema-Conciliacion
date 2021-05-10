@@ -7,7 +7,8 @@
 <div class="example-wrapper">
     <h1>Bienvenido al {{ controller_name }}! ✅</h1>
 
-    {% for message in app.flashes('exito') %} //llamamos a la clave de acceso "exito"
+    //llamamos a la clave de acceso "exito" desde el controlador
+    {% for message in app.flashes('exito') %}
         <div class="alert alert-success">
             {{ message }}
         </div>

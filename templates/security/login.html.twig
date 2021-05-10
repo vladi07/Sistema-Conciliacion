@@ -2,7 +2,13 @@
 
 {% block title %}Iniciar Sesion{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+{% endblock %}
+
 {% block body %}
+    <img class="fondo" src="img/FondoDecoloracion.jpg">
+    <h1>MINISTERIO DE JUSTICIA Y TRANSPARENCIA INSTITUCIONAL</h1>
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -13,6 +19,8 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
+
+
 
     <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h1>
     <label for="inputUsername">Usuario</label>

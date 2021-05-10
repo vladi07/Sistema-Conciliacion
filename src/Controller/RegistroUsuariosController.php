@@ -33,7 +33,8 @@ class RegistroUsuariosController extends AbstractController
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($usuario);
             $em -> flush();
-            //creamos la llave "exito" para mostrar el mensaje
+            //creamos la llave "exito" para mostrar el mensaje en el Index del Controlador "registro_usuarios"
+            //En esta parte podemos colocar constantes definidas en la entidad Usuarios
             $this->addFlash('exito', Usuarios::REGISTRO_EXITOSO);
             return $this->redirectToRoute('registro_usuarios');
         }

@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Usuarios implements UserInterface
 {
+    //Definimos una constante para llamar desde el controlador
     const REGISTRO_EXITOSO = 'Se ha registrado exitosamente';
 
     /**
@@ -56,8 +57,6 @@ class Usuarios implements UserInterface
      */
     private $fechaCreacion;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Funciones", mappedBy="usuarios")
      */
@@ -82,8 +81,6 @@ class Usuarios implements UserInterface
     {
         $this->casoConciliatorio = new ArrayCollection();
     }
-
-    
 
     public function getId(): ?int
     {
