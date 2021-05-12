@@ -37,6 +37,11 @@ class Documentacion
      */
     private $casoConciliatorio;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\SolicitudConciliacion", inversedBy="documentacion")
+     */
+    private $solicitud;
+
 
     public function getId(): ?int
     {
@@ -64,4 +69,38 @@ class Documentacion
         $this->ruta = $ruta;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCasoConciliatorio()
+    {
+        return $this->casoConciliatorio;
+    }
+
+    /**
+     * @param mixed $casoConciliatorio
+     */
+    public function setCasoConciliatorio($casoConciliatorio): void
+    {
+        $this->casoConciliatorio = $casoConciliatorio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSolicitud()
+    {
+        return $this->solicitud;
+    }
+
+    /**
+     * @param mixed $solicitud
+     */
+    public function setSolicitud($solicitud): void
+    {
+        $this->solicitud = $solicitud;
+    }
+
+
 }

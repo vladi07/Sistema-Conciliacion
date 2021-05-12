@@ -60,8 +60,18 @@ class Centro
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CasoConciliatorio", mappedBy="centro")
      */
-
     private $casoConciliatorio;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Salas", mappedBy="centro")
+     */
+    private $sala;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Actividad", mappedBy="centro")
+     */
+    private $actividad;
+
 
     public function getId(): ?int
     {
@@ -150,5 +160,69 @@ class Centro
         $this->departamento = $departamento;
 
         return $this;
+    }
+
+    /**
+    * @return mixed
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * @param mixed $usuarios
+     */
+    public function setUsuarios($usuarios): void
+    {
+        $this->usuarios = $usuarios;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCasoConciliatorio()
+    {
+        return $this->casoConciliatorio;
+    }
+
+    /**
+     * @param mixed $casoConciliatorio
+     */
+    public function setCasoConciliatorio($casoConciliatorio): void
+    {
+        $this->casoConciliatorio = $casoConciliatorio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSala()
+    {
+        return $this->sala;
+    }
+
+    /**
+     * @param mixed $sala
+     */
+    public function setSala($sala): void
+    {
+        $this->sala = $sala;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActividad()
+    {
+        return $this->actividad;
+    }
+
+    /**
+     * @param mixed $actividad
+     */
+    public function setActividad($actividad): void
+    {
+        $this->actividad = $actividad;
     }
 }

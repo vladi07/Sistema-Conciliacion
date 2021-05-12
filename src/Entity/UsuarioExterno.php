@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioExternoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +58,23 @@ class UsuarioExterno
      * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="usuarioExterno")
      */
     private $persona;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=SolicitudConciliacion::class, mappedBy="solicitante")
+     */
+    private $solicitud;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=CasoConciliatorio::class, mappedBy="usuarioExterno")
+     */
+    private $casosConciliatorios;
+
+
+    public function __construct()
+    {
+        $this->solicitud = new ArrayCollection();
+        $this->casosConciliatorios = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -146,4 +165,76 @@ class UsuarioExterno
 
         return $this;
     }
+
+    /**
+     * @return Collection|SolicitudConciliacion[]
+     */
+    public function getSolicitud(): Collection
+    {
+        return $this->solicitud;
+    }
+
+    public function addSolicitud(SolicitudConciliacion $solicitud): self
+    {
+        if (!$this->solicitud->contains($solicitud)) {
+            $this->solicitud[] = $solicitud;
+            $solicitud->addSolicitante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSolicitud(SolicitudConciliacion $solicitud): self
+    {
+        if ($this->solicitud->removeElement($solicitud)) {
+            $solicitud->removeSolicitante($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPersona()
+    {
+        return $this->persona;
+    }
+
+    /**
+     * @param mixed $persona
+     */
+    public function setPersona($persona): void
+    {
+        $this->persona = $persona;
+    }
+
+    /**
+     * @return Collection|CasoConciliatorio[]
+     */
+    public function getCasosConciliatorios(): Collection
+    {
+        return $this->casosConciliatorios;
+    }
+
+    public function addCasosConciliatorio(CasoConciliatorio $casosConciliatorio): self
+    {
+        if (!$this->casosConciliatorios->contains($casosConciliatorio)) {
+            $this->casosConciliatorios[] = $casosConciliatorio;
+            $casosConciliatorio->addUsuarioExterno($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCasosConciliatorio(CasoConciliatorio $casosConciliatorio): self
+    {
+        if ($this->casosConciliatorios->removeElement($casosConciliatorio)) {
+            $casosConciliatorio->removeUsuarioExterno($this);
+        }
+
+        return $this;
+    }
+
+
 }

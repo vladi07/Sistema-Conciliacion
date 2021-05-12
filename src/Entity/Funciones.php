@@ -68,4 +68,38 @@ class Funciones
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * @param mixed $usuarios
+     */
+    public function setUsuarios($usuarios): void
+    {
+        $this->usuarios = $usuarios;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPermisos()
+    {
+        return $this->permisos;
+    }
+
+    /**
+     * @param mixed $permisos
+     */
+    public function setPermisos($permisos): void
+    {
+        $this->permisos = $permisos;
+    }
+
+
 }

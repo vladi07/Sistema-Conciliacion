@@ -29,9 +29,32 @@ class Actividad
      */
     private $fecha;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Centro", inversedBy="actividad")
+     */
+    private $centro;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCentro()
+    {
+        return $this->centro;
+    }
+
+    /**
+     * @param mixed $centro
+     */
+    public function setCentro($centro): void
+    {
+        $this->centro = $centro;
     }
 
     public function getDescripcion(): ?string

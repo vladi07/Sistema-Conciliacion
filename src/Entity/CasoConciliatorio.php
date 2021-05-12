@@ -69,10 +69,23 @@ class CasoConciliatorio
      */
     private $usuarios;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SolicitudConciliacion", mappedBy="casoConciliatorio")
+     */
+    private $solicitud;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=UsuarioExterno::class, inversedBy="casosConciliatorios")
+     */
+    private $usuarioExterno;
+
+
     public function __construct()
     {
         $this->usuarios = new ArrayCollection();
+        $this->usuarioExterno = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -189,4 +202,78 @@ class CasoConciliatorio
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCentro()
+    {
+        return $this->centro;
+    }
+
+    /**
+     * @param mixed $centro
+     */
+    public function setCentro($centro): void
+    {
+        $this->centro = $centro;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDocumentacion()
+    {
+        return $this->documentacion;
+    }
+
+    /**
+     * @param mixed $documentacion
+     */
+    public function setDocumentacion($documentacion): void
+    {
+        $this->documentacion = $documentacion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSolicitud()
+    {
+        return $this->solicitud;
+    }
+
+    /**
+     * @param mixed $solicitud
+     */
+    public function setSolicitud($solicitud): void
+    {
+        $this->solicitud = $solicitud;
+    }
+
+    /**
+     * @return Collection|UsuarioExterno[]
+     */
+    public function getUsuarioExterno(): Collection
+    {
+        return $this->usuarioExterno;
+    }
+
+    public function addUsuarioExterno(UsuarioExterno $usuarioExterno): self
+    {
+        if (!$this->usuarioExterno->contains($usuarioExterno)) {
+            $this->usuarioExterno[] = $usuarioExterno;
+        }
+
+        return $this;
+    }
+
+    public function removeUsuarioExterno(UsuarioExterno $usuarioExterno): self
+    {
+        $this->usuarioExterno->removeElement($usuarioExterno);
+
+        return $this;
+    }
+
+
 }

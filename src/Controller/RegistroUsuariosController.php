@@ -18,7 +18,7 @@ class RegistroUsuariosController extends AbstractController
      */
     public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $usuario = new Usuarios();
+        $usuario = new Usuarios(); //Creamos un objeto de tipo usuario
         $form = $this -> createForm(UsuariosType::class, $usuario);
         $form -> handleRequest($request);
 

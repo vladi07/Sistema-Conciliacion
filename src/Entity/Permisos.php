@@ -64,4 +64,22 @@ class Permisos
         $this->descripcion = $descripcion;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFunciones()
+    {
+        return $this->funciones;
+    }
+
+    /**
+     * @param mixed $funciones
+     */
+    public function setFunciones($funciones): void
+    {
+        $this->funciones = $funciones;
+    }
+
+
 }

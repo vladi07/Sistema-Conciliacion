@@ -254,4 +254,38 @@ class Persona
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * @param mixed $usuarios
+     */
+    public function setUsuarios($usuarios): void
+    {
+        $this->usuarios = $usuarios;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsuarioExterno()
+    {
+        return $this->usuarioExterno;
+    }
+
+    /**
+     * @param mixed $usuarioExterno
+     */
+    public function setUsuarioExterno($usuarioExterno): void
+    {
+        $this->usuarioExterno = $usuarioExterno;
+    }
+
+
 }

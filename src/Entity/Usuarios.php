@@ -79,7 +79,7 @@ class Usuarios implements UserInterface
 
     public function __construct()
     {
-        $this->casoConciliatorio = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -230,6 +230,52 @@ class Usuarios implements UserInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFunciones()
+    {
+        return $this->funciones;
+    }
 
+    /**
+     * @param mixed $funciones
+     */
+    public function setFunciones($funciones): void
+    {
+        $this->funciones = $funciones;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPersona()
+    {
+        return $this->persona;
+    }
+
+    /**
+     * @param mixed $persona
+     */
+    public function setPersona($persona): void
+    {
+        $this->persona = $persona;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCentro()
+    {
+        return $this->centro;
+    }
+
+    /**
+     * @param mixed $centro
+     */
+    public function setCentro($centro): void
+    {
+        $this->centro = $centro;
+    }
 
 }

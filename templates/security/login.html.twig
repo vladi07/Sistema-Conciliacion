@@ -3,11 +3,11 @@
 {% block title %}Iniciar Sesion{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+
 {% endblock %}
 
 {% block body %}
-    <img class="fondo" src="img/FondoDecoloracion.jpg">
+
     <h1>MINISTERIO DE JUSTICIA Y TRANSPARENCIA INSTITUCIONAL</h1>
 <form method="post">
     {% if error %}
@@ -16,7 +16,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Usted esta ingresando como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar Sesion</a>
         </div>
     {% endif %}
 

@@ -25,6 +25,48 @@ class Salas
      */
     private $nombre;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Centro", inversedBy="sala")
+     */
+    private $centro;
+
+    /**
+     * @return mixed
+     */
+    public function getCentro()
+    {
+        return $this->centro;
+    }
+
+    /**
+     * @param mixed $centro
+     */
+    public function setCentro($centro): void
+    {
+        $this->centro = $centro;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAgenda()
+    {
+        return $this->agenda;
+    }
+
+    /**
+     * @param mixed $agenda
+     */
+    public function setAgenda($agenda): void
+    {
+        $this->agenda = $agenda;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Agenda", mappedBy="sala")
+     */
+    private $agenda;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -40,4 +82,6 @@ class Salas
         $this->nombre = $nombre;
         return $this;
     }
+
+
 }

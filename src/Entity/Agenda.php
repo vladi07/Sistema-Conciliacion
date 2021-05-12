@@ -40,6 +40,12 @@ class Agenda
      */
     private $fecha;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Salas", inversedBy="agenda")
+     */
+    private $sala;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,4 +84,22 @@ class Agenda
         $this->fecha = $fecha;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSala()
+    {
+        return $this->sala;
+    }
+
+    /**
+     * @param mixed $sala
+     */
+    public function setSala($sala): void
+    {
+        $this->sala = $sala;
+    }
+
+
 }
