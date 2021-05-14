@@ -95,9 +95,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+        //Definimos donde nos va a redireccionar en este caso
+        //Nos vamos al nombre de la ruta "/principal" que es "Principal"
+        return new RedirectResponse('/principal');
 
-        return new RedirectResponse('principal');
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl()

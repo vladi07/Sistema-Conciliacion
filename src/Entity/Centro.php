@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Centro
 {
+    const REGISTRO_EXITOSO = 'Se ha registrado un CENTRO exitosamente';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

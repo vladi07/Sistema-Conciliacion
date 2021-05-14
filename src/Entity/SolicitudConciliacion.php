@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SolicitudConciliacion
 {
+    const REGISTRO_EXITOSO = 'Se ha registrado exitosamente';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,22 +22,22 @@ class SolicitudConciliacion
     private $id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      */
     private $descripcion;
 
     /**
-     * @ORM\Column(type="string", length=120, nullable=true)
+     * @ORM\Column(type="string", length=120, nullable=false)
      */
     private $materia;
 
     /**
-     * @ORM\Column(type="string", length=120, nullable=true)
+     * @ORM\Column(type="string", length=120, nullable=false)
      */
     private $tipoConciliacion;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date", nullable=false)
      */
     private $fecha;
 
@@ -54,10 +56,16 @@ class SolicitudConciliacion
      */
     private $documentacion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuarios::class, inversedBy="solicitudConciliacion")
+     */
+    private $usuario;
+
 
     public function __construct()
     {
         $this->solicitante = new ArrayCollection();
+        $this -> fecha = new \DateTime();
     }
 
 
@@ -164,6 +172,17 @@ class SolicitudConciliacion
     public function setDocumentacion($documentacion): void
     {
         $this->documentacion = $documentacion;
+    }
+
+    public function getUsuario(): ?Usuarios
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuarios $usuario): self
+    {
+        $this->usuario = $usuario;
+        return $this;
     }
 
 

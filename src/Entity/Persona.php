@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Persona
 {
+    const REGISTRO_EXITOSO = 'Se ha registrado exitosamente a la Persona';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -44,7 +46,9 @@ class Persona
     private $segundoApellido;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(
+     *     type="bigint",
+     *     nullable=false)
      */
     private $documentoIdentidad;
 
@@ -70,7 +74,7 @@ class Persona
     private $genero;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
     private $correo;
 
@@ -90,9 +94,14 @@ class Persona
     private $domicilio;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $departamento;
+
+    /**
+     * @ORM\Column(type="string", length=254, nullable=true)
+     */
+    private $foto;
 
 
     /**
@@ -104,6 +113,13 @@ class Persona
      * @ORM\OneToMany(targetEntity="App\Entity\UsuarioExterno", mappedBy="persona")
      */
     private $usuarioExterno;
+
+    /**
+     * Persona constructor.
+     */
+    public function __construct()
+    {
+    }
 
 
     public function getId(): ?int
@@ -285,6 +301,18 @@ class Persona
     public function setUsuarioExterno($usuarioExterno): void
     {
         $this->usuarioExterno = $usuarioExterno;
+    }
+
+    public function getFoto(): ?string
+    {
+        return $this->foto;
+    }
+
+    public function setFoto(?string $foto): self
+    {
+        $this->foto = $foto;
+
+        return $this;
     }
 
 

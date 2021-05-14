@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Usuarios implements UserInterface
 {
     //Definimos una constante para llamar desde el controlador
-    const REGISTRO_EXITOSO = 'Se ha registrado exitosamente';
+    const REGISTRO_EXITOSO = 'Se ha registrado al Usuario exitosamente';
 
     /**
      * @ORM\Id
@@ -77,10 +77,21 @@ class Usuarios implements UserInterface
      */
     private $casoConciliatorio;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SolicitudConciliacion::class, mappedBy="usuario")
+     */
+    private $solicitudConciliacion;
+
+
+    /**
+     * Usuarios constructor.
+     */
     public function __construct()
     {
-
+        $this->fechaCreacion= new \DateTime();
+        $this->solicitudConciliacion = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -100,7 +111,6 @@ class Usuarios implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
-
         return $this;
     }
 
@@ -226,7 +236,6 @@ class Usuarios implements UserInterface
     public function removeCasoConciliatorio(CasoConciliatorio $casoConciliatorio): self
     {
         $this->casoConciliatorio->removeElement($casoConciliatorio);
-
         return $this;
     }
 
@@ -277,5 +286,37 @@ class Usuarios implements UserInterface
     {
         $this->centro = $centro;
     }
+
+    /**
+     * @return Collection|SolicitudConciliacion[]
+     */
+    public function getSolicitudConciliacion(): Collection
+    {
+        return $this->solicitudConciliacion;
+    }
+
+    public function addSolicitudConciliacion(SolicitudConciliacion $solicitudConciliacion): self
+    {
+        if (!$this->solicitudConciliacion->contains($solicitudConciliacion)) {
+            $this->solicitudConciliacion[] = $solicitudConciliacion;
+            $solicitudConciliacion->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSolicitudConciliacion(SolicitudConciliacion $solicitudConciliacion): self
+    {
+        if ($this->solicitudConciliacion->removeElement($solicitudConciliacion)) {
+            // set the owning side to null (unless already changed)
+            if ($solicitudConciliacion->getUsuario() === $this) {
+                $solicitudConciliacion->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 
 }

@@ -9,12 +9,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class PrincipalController extends AbstractController
 {
     /**
-     * @Route("/principal", name="principal")
+     * @Route("/principal", name="Principal")
      */
     public function index(): Response
     {
+        //Creamos un objeto de tipo Principal
+
+
         return $this->render('principal/index.html.twig', [
-            'controller_name' => 'Sistema de Conciliación',
+            'controller_name' => 'Ventana Principal del Sistema de Conciliación',
         ]);
     }
 }

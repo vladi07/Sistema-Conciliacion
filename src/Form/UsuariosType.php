@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Usuarios;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,9 +16,15 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('estado')
+            ->add('username', TextType::class, ['label' => 'Usuario'])
+            ->add('password', PasswordType::class, ['label' => 'Contraseña'])
+            ->add('estado', CheckboxType::class, [
+                                        'label' => '¿Desea activar este usuario?',
+                                        'required' => false,
+                                        ])
+            //->add('creadoPor')
+            //->add('persona')
+            //->add('centro')
             ->add('Registrar', SubmitType::class)
         ;
     }
