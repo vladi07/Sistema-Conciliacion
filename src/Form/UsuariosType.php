@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Persona;
 use App\Entity\Usuarios;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -23,7 +25,9 @@ class UsuariosType extends AbstractType
                                         'required' => false,
                                         ])
             //->add('creadoPor')
-            //->add('persona')
+            //->add('persona', EntityType::class, [
+                //'class' => Persona::class,
+            //])
             //->add('centro')
             ->add('Registrar', SubmitType::class)
         ;

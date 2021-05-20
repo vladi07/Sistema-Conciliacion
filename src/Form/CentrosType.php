@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Centro;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,27 +20,29 @@ class CentrosType extends AbstractType
             ->add('direccion')
             ->add('matricula')
             ->add('tipo', ChoiceType::class, [
+                'placeholder' => 'Seleccione una opción',
                 'choices' => [
-                    'Privado' => 'privado',
-                    'Publico' => 'publico'
+                    'Privado' => 'Privado',
+                    'Publico' => 'Publico'
                 ],
             ])
             ->add('telefono', NumberType::class)
-            ->add('correo')
+            ->add('correo', EmailType::class)
             ->add('departamento',ChoiceType::class, [
-                'placeholder' => 'Seleccione una opcion',
+                'placeholder' => 'Seleccione una opción',
                 'choices' => [
-                    'LPZ' => 'La Paz',
-                    'CBBA' => 'Cochabamba',
-                    'BE' => 'Beni',
-                    'SZ' => 'Santa Cruz',
-                    'TJ' => 'Tarija',
-                    'CHU' => 'Chuquisaca',
-                    'PO' => 'Potosi',
-                    'OR' => 'Oruro',
-                    'PA' => 'Pando',
+                    'La Paz' => 'La Paz',
+                    'Cochabamba' => 'Cochabamba',
+                    'Beni' => 'Beni',
+                    'Santa Cruz' => 'Santa Cruz',
+                    'Tarija' => 'Tarija',
+                    'Chuquisaca' => 'Chuquisaca',
+                    'Potosi' => 'Potosi',
+                    'Oruro' => 'Oruro',
+                    'Pando' => 'Pando',
                 ],
             ])
+            //->add('usuarios')
             ->add('Guardar', SubmitType::class)
         ;
     }

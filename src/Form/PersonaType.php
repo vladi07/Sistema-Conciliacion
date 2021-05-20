@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,9 +22,9 @@ class PersonaType extends AbstractType
             ->add('nombres')
             ->add('primerApellido')
             ->add('segundoApellido')
-            ->add('documentoIdentidad')
+            ->add('documentoIdentidad', NumberType::class)
             ->add('expedido', ChoiceType::class,[
-                'placeholder' => 'Seleccione una opcion',
+                'placeholder' => 'Seleccione una opción',
                 'choices' => [
                     'LP' => 'La Paz',
                     'CB' => 'Cochabamba',
@@ -35,13 +38,37 @@ class PersonaType extends AbstractType
                 ]
             ])
             ->add('fechaNacimiento', DateType::class,['widget' => 'single_text'])
-            ->add('genero')
-            ->add('correo')
-            ->add('telefono')
+            ->add('genero',ChoiceType::class,[
+                'placeholder' => 'Seleccione una opción',
+                'choices' => [
+                    'FEMENINO' => 'Femenino',
+                    'MASCULINO' => 'Masculino'
+                ]
+            ])
+            ->add('correo', EmailType::class)
+            ->add('telefono', NumberType::class )
             ->add('gradoAcademico')
             ->add('domicilio')
-            ->add('departamento')
-            ->add('foto')
+            ->add('departamento',ChoiceType::class, [
+                    'placeholder' => 'Seleccione una opcion',
+                    'choices' => [
+                        'La Paz' => 'La Paz',
+                        'Cochabamba' => 'Cochabamba',
+                        'Beni' => 'Beni',
+                        'Santa Cruz' => 'Santa Cruz',
+                        'Tarija' => 'Tarija',
+                        'Chuquisaca' => 'Chuquisaca',
+                        'Potosi' => 'Potosi',
+                        'Oruro' => 'Oruro',
+                        'Pando' => 'Pando',
+                    ],
+
+            ])
+            ->add('foto', FileType::class, [
+                'label' => 'Seleccione una imagen para la foto',
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('Guardar', SubmitType::class)
         ;
     }

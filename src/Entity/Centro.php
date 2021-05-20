@@ -45,7 +45,7 @@ class Centro
     private $telefono;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", length=200, nullable=true)
      */
     private $correo;
 

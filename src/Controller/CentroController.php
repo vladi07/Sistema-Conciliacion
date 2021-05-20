@@ -29,7 +29,7 @@ class CentroController extends AbstractController
         }
 
         return $this->render('centro/index.html.twig', [
-            'controller_name' => 'Centro Controller',
+            'controller_name' => 'Registro de Centros de Conciliación',
             'formulario' => $form -> createView()
         ]);
     }
