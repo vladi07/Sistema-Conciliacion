@@ -311,7 +311,6 @@ class Persona
     public function setFoto(?string $foto): self
     {
         $this->foto = $foto;
-
         return $this;
     }
 
