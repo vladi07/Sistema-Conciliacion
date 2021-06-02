@@ -40,4 +40,14 @@ class SolicitudController extends AbstractController
 
         ]);
     }
+
+    /**
+     * @Route ("/mis_solicitudes", name="Mis_Solicitudes")
+     */
+    public function MisSolicitudes(){
+        $em = $this->getDoctrine()->getManager();
+        $usuario = $this -> getUser();
+        $solicitudes = $em -> getRepository(SolicitudConciliacion::class)->findBy(['usuario'=>$usuario]);
+        return $this -> render('solicitud/MisSolicitudes.html.twig', ['solicitudes' => $solicitudes]);
+    }
 }

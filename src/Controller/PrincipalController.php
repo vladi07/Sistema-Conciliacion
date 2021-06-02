@@ -16,21 +16,21 @@ class PrincipalController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $em = $this -> getDoctrine() -> getManager();
+        $em = $this->getDoctrine()->getManager();
         //$personas = $em -> getRepository(Persona::class) -> findAll();
         //$verPersona = $em -> getRepository(Persona::class) -> find(5);
         //$personalizado1 = $em -> getRepository(Persona::class)
-            //-> findOneBy(['nombres'=>'Carola Alejandra']);
+        //-> findOneBy(['nombres'=>'Carola Alejandra']);
         //$personalizado2 = $em -> getRepository(Persona::class)
-            //-> findBy(['primerApellido'=>'Perez']);
-        $query = $em -> getRepository(Persona::class) -> BuscarPersonas();
+        //-> findBy(['primerApellido'=>'Perez']);
+        $query = $em->getRepository(Persona::class)->BuscarPersonas();
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             3 /*limit per page*/
         );
 
-        return $this -> render('principal/index.html.twig',[
+        return $this->render('principal/index.html.twig', [
             //'personas' => $personas,
             //'verPersona' => $verPersona,
             //'personal1' => $personalizado1,

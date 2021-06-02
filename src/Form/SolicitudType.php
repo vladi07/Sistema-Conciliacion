@@ -33,8 +33,8 @@ class SolicitudType extends AbstractType
                 ]
             ])
             //->add('fecha')
-            ->add('solicitante')
-            ->add('casoConciliatorio')
+            //->add('solicitante')
+            //->add('casoConciliatorio')
             ->add('Registrar', SubmitType::class)
         ;
     }

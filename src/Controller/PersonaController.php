@@ -68,4 +68,24 @@ class PersonaController extends AbstractController
             'formulario' => $form -> createView()
         ]);
     }
+
+    /**
+     * @Route ("/persona/{id}", name="Ver_Persona")
+     */
+    public function VerPersona($id){
+        //Buscamos una persona que reciva el ID
+        $em = $this -> getDoctrine() -> getManager();
+        //mostramos el registro de la persona
+        $persona = $em->getRepository(Persona::class)->find($id);
+        //Mostramos en la vista el ID encontrado
+        return $this->render('persona/verPersona.html.twig',['resultado'=>$persona]);
+    }
+
+    /**
+     * @Route ("/mis_personas", name="Mis_Personas")
+     */
+    public function MisPersonas(){
+        $em = $this->getDoctrine()->getManager();
+        $usuario = $this->getUser();
+    }
 }
