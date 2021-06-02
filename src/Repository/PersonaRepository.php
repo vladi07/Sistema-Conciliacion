@@ -19,6 +19,14 @@ class PersonaRepository extends ServiceEntityRepository
         parent::__construct($registry, Persona::class);
     }
 
+    public function BuscarPersonas(){
+        return $this -> getEntityManager()
+            ->createQuery('
+                SELECT persona.id, persona.nombres, persona.primerApellido, persona.documentoIdentidad,
+                        persona.fechaNacimiento, persona.departamento, persona.foto
+                FROM App:Persona persona
+            ');
+    }
     // /**
     //  * @return Persona[] Returns an array of Persona objects
     //  */
