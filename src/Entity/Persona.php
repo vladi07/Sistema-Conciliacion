@@ -50,7 +50,7 @@ class Persona
      *     type="bigint",
      *     nullable=false)
      */
-    private $documentoIdentidad;
+    private $numeroDocumento;
 
     /**
      * @ORM\Column(
@@ -74,7 +74,7 @@ class Persona
     private $genero;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=false)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $correo;
 
@@ -94,15 +94,9 @@ class Persona
     private $domicilio;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
-     */
-    private $departamento;
-
-    /**
      * @ORM\Column(type="string", length=254, nullable=true)
      */
     private $foto;
-
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Usuarios", mappedBy="persona")
@@ -113,6 +107,11 @@ class Persona
      * @ORM\OneToMany(targetEntity="App\Entity\UsuarioExterno", mappedBy="persona")
      */
     private $usuarioExterno;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Departamentos", inversedBy="persona")
+     */
+    private $departamento;
 
     /**
      * Persona constructor.
@@ -163,14 +162,14 @@ class Persona
         return $this;
     }
 
-    public function getDocumentoIdentidad(): ?int
+    public function getNumeroDocumento(): ?int
     {
-        return $this->documentoIdentidad;
+        return $this->numeroDocumento;
     }
 
-    public function setDocumentoIdentidad(int $documentoIdentidad): self
+    public function setNumeroDocumento(int $numeroDocumento): self
     {
-        $this->documentoIdentidad = $documentoIdentidad;
+        $this->numeroDocumento = $numeroDocumento;
 
         return $this;
     }
@@ -235,6 +234,17 @@ class Persona
         return $this;
     }
 
+    public function getFoto(): ?string
+    {
+        return $this->foto;
+    }
+
+    public function setFoto(?string $foto): self
+    {
+        $this->foto = $foto;
+        return $this;
+    }
+
     public function getGradoAcademico(): ?string
     {
         return $this->gradoAcademico;
@@ -259,19 +269,23 @@ class Persona
         return $this;
     }
 
-    public function getDepartamento(): ?string
+    /**
+     * @return mixed
+     */
+    public function getDepartamento()
     {
         return $this->departamento;
     }
 
-    public function setDepartamento(?string $departamento): self
+    /**
+     * @param mixed $departamento
+     */
+    public function setDepartamento($departamento): void
     {
         $this->departamento = $departamento;
-
-        return $this;
     }
 
-    /**
+     /**
      * @return mixed
      */
     public function getUsuarios()
@@ -302,17 +316,4 @@ class Persona
     {
         $this->usuarioExterno = $usuarioExterno;
     }
-
-    public function getFoto(): ?string
-    {
-        return $this->foto;
-    }
-
-    public function setFoto(?string $foto): self
-    {
-        $this->foto = $foto;
-        return $this;
-    }
-
-
 }

@@ -61,7 +61,9 @@ class SolicitudConciliacion
      */
     private $usuario;
 
-
+    /**
+     * SolicitudConciliacion constructor.
+     */
     public function __construct()
     {
         $this->solicitante = new ArrayCollection();

@@ -1,22 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Creación de Centros!{% endblock %}
+{% block title %}Nuevo Centro{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+    </style>
+    {{ parent() }}
+    <div class="example-wrapper">
+        <h1> {{ controller_name }}</h1>
+        {# Mostramos en pantalla el mesaje de obtenemos del Controlador #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {# Llamamos al formulario en Twig #}
+        {{ form(formulario) }}
 
-<div class="example-wrapper">
-    <h1> {{ controller_name }}! ✅</h1>
-
-    {{ form(formulario) }}
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-</div>
+    </div>
 {% endblock %}

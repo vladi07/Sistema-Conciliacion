@@ -18,7 +18,8 @@ class PersonaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Persona::class);
     }
-
+    // Creamos la funcion "BUSCAR PERSONA" con la ayuda de un query
+    // Llamamos a esta funcion en el CONTROLLER donde queremos mostrar el resultado -> PrincipalController
     public function BuscarPersonas(){
         return $this -> getEntityManager()
             ->createQuery('

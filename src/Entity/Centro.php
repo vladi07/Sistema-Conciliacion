@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CentroRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=CentroRepository::class)
@@ -50,11 +51,6 @@ class Centro
     private $correo;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $departamento;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Usuarios", mappedBy="centro")
      */
     private $usuarios;
@@ -74,6 +70,18 @@ class Centro
      */
     private $actividad;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Departamentos", inversedBy="centro")
+     */
+    private $departamento;
+
+    /**
+     * Centro constructor.
+     */
+
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {
@@ -152,18 +160,6 @@ class Centro
         return $this;
     }
 
-    public function getDepartamento(): ?string
-    {
-        return $this->departamento;
-    }
-
-    public function setDepartamento(string $departamento): self
-    {
-        $this->departamento = $departamento;
-
-        return $this;
-    }
-
     /**
     * @return mixed
      */
@@ -226,5 +222,22 @@ class Centro
     public function setActividad($actividad): void
     {
         $this->actividad = $actividad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartamento(): ?Departamentos
+    {
+        return $this->departamento;
+    }
+
+    /**
+     * @param mixed $departamento
+     */
+    public function setDepartamento(?Departamentos $departamento): self
+    {
+        $this->departamento = $departamento;
+        return $this;
     }
 }

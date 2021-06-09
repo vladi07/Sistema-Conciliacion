@@ -21,9 +21,9 @@ class UsuariosType extends AbstractType
             ->add('username', TextType::class, ['label' => 'Usuario'])
             ->add('password', PasswordType::class, ['label' => 'Contraseña'])
             ->add('estado', CheckboxType::class, [
-                                        'label' => '¿Desea activar este usuario?',
-                                        'required' => false,
-                                        ])
+                'label' => '¿Desea activar este usuario?',
+                'required' => false,
+            ])
             //->add('creadoPor')
             //->add('persona', EntityType::class, [
                 //'class' => Persona::class,

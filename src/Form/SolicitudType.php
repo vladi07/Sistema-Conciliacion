@@ -26,7 +26,10 @@ class SolicitudType extends AbstractType
                 ],
             ])
             ->add('tipoConciliacion', ChoiceType::class,[
+                'label' => 'Tipo de Conciliación',
                 'placeholder' => 'Seleccione una opción',
+                'expanded' => true,
+                'multiple' => false,
                 'choices' => [
                     'Virtual' => 'VIRTUAL',
                     'Presencial' => 'PRESENCIAL'

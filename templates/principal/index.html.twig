@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ventana Principal{% endblock %}
+{% block title %}
+    {{ parent() }} - Principal
+{% endblock %}
 
 {% block body %}
-
-    {# total items count #}
+    {{ parent() }}
+    {# Numero total de los items #}
+    {#
     <div class="count">
         {{ pagination.getTotalItemCount }}
     </div>
+    #}
     <table>
         <tr>
             {# sorting of properties based on query components #}
