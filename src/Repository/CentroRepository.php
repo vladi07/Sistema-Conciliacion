@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Centro;
+use App\Entity\Usuarios;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,16 @@ class CentroRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Centro::class);
+    }
+
+    public function BuscarTodosCentros(){
+        return $this -> getEntityManager()
+            ->createQuery('
+                SELECT centro.id, centro.nombre, centro.direccion, centro.matricula, 
+                       centro.tipo, centro.telefono, centro.correo
+                FROM App:Centro centro  
+               
+            ');
     }
 
     // /**

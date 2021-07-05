@@ -72,7 +72,7 @@ class PersonaType extends AbstractType
             ])
             ->add('foto', FileType::class, [
                 'label' => 'Foto de Perfil',
-                'mapped' => true,
+                'mapped' => false,
                 'required' => false
             ])
             ->add('Registrar', SubmitType::class)

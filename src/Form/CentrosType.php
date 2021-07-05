@@ -24,10 +24,10 @@ class CentrosType extends AbstractType
             ->add('tipo', ChoiceType::class, [
                 'multiple' => false,
                 'expanded' => true,
-                'placeholder' => 'Seleccione una opción',
+                //'placeholder' => 'Seleccione una opción',
                 'choices' => [
-                    'Privado' => 'Privado',
-                    'Publico' => 'Publico'
+                    'PRIVADO' => 'Privado',
+                    'PUBLICO' => 'Publico'
                 ],
             ])
             ->add('telefono', NumberType::class, [

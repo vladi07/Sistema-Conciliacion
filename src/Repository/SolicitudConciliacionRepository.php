@@ -19,6 +19,20 @@ class SolicitudConciliacionRepository extends ServiceEntityRepository
         parent::__construct($registry, SolicitudConciliacion::class);
     }
 
+    public function BuscarSolcicitudes(){
+        return $this -> getEntityManager()
+            ->createQuery('
+              SELECT solicitud_conciliacion.id, 
+                    solicitud_conciliacion.descripcion, 
+                    solicitud_conciliacion.materia,
+                    solicitud_conciliacion.tipo_conciliacion, 
+                    solicitud_conciliacion.fecha,
+                    usuarios.username 
+              FROM App:SolicitudConciliacion solicitud
+              JOIN solicitud_conciliacion.usuario
+            ');
+    }
+
     // /**
     //  * @return SolicitudConciliacion[] Returns an array of SolicitudConciliacion objects
     //  */

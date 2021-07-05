@@ -23,8 +23,8 @@ class PersonaRepository extends ServiceEntityRepository
     public function BuscarPersonas(){
         return $this -> getEntityManager()
             ->createQuery('
-                SELECT persona.id, persona.nombres, persona.primerApellido, persona.documentoIdentidad,
-                        persona.fechaNacimiento, persona.departamento, persona.foto
+                SELECT persona.id, persona.nombres, persona.primerApellido, persona.numeroDocumento,
+                        persona.fechaNacimiento, persona.foto
                 FROM App:Persona persona
             ');
     }

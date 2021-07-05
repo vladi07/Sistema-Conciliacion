@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\Collection;
 class Centro
 {
     const REGISTRO_EXITOSO = 'Se ha registrado un CENTRO exitosamente';
+    const MOSTRAR_REGISTRO = 'Se muestran los registros encontrados';
 
     /**
      * @ORM\Id
@@ -78,7 +79,6 @@ class Centro
     /**
      * Centro constructor.
      */
-
     public function __construct()
     {
     }

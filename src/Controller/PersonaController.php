@@ -43,7 +43,7 @@ class PersonaController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... throw new \Exception('Lo siento!. Ha occurido un error');
+                    //throw new \Exception('Lo siento!. Ha occurido un error');
                 }
 
                 $persona->setFoto($newFilename);
