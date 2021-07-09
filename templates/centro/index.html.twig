@@ -1,36 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index Centros{% endblock %}
+{% block title %}
+    {{ parent() }}-Index Centros
+{% endblock %}
 
 {% block body %}
-    <style>
-    </style>
     {{ parent() }}
+
+    {#
+    {{ dump(allCentros) }}
+    {{ dump(centros) }}
+    #}
 
     <h1> {{ controller_name }}</h1>
     {{ dump(pagination) }}
 
-
     {# Numero total de los items #}
-
+    {# Codigo de la paginacion del KNPaginator #}
     <div class="count">
         <h3>Numero total de Centros:</h3>
         {{ pagination.getTotalItemCount }}
     </div>
-
-
     <table>
         <tr>
             {# sorting of properties based on query components #}
             <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
             <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}
+                {{ knp_pagination_sortable(pagination, 'Nombre', 'a.title') }}
             </th>
             <th{% if pagination.isSorted(['a.date', 'a.time']) %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(pagination, 'Release', ['a.date', 'a.time']) }}
             </th>
+            <th{% if pagination.isSorted(['a.date', 'a.time']) %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(pagination, 'Dirección', ['a.date', 'a.time']) }}
+            </th>
         </tr>
-
         {# table body #}
         {% for article in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
@@ -41,10 +45,11 @@
                 <td>{{ article.tipo }}</td>
                 <td>{{ article.telefono }}</td>
                 <td>{{ article.correo }}</td>
+                {# <td>{{ article.departamento }}</td> #}
             </tr>
         {% endfor %}
     </table>
-    {# display navigation #}
+     {# display navigat #}
     <div class="navigation">
         {{ knp_pagination_render(pagination) }}
     </div>

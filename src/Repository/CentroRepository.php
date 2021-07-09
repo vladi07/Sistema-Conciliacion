@@ -25,9 +25,8 @@ class CentroRepository extends ServiceEntityRepository
             ->createQuery('
                 SELECT centro.id, centro.nombre, centro.direccion, centro.matricula, 
                        centro.tipo, centro.telefono, centro.correo
-                FROM App:Centro centro  
-               
-            ');
+                FROM App:Centro centro   
+            ') ;
     }
 
     // /**

@@ -21,9 +21,6 @@ class CentroController extends AbstractController
         $em = $this -> getDoctrine() -> getManager();
         //Llamamos a la consulta DQL personalisado en el CENTROREPOSITORY
         $query = $em -> getRepository(Centro::class) -> BuscarTodosCentros();
-        //Mostramos todos los campos con ayuda de FINDALL
-        //$allCentros = $em -> getRepository(Centro::class) -> findAll();
-
         $pagination = $paginator->paginate(
             $query, /* consulta NO resultado */
             $request->query->getInt('page', 1), /*page number*/
@@ -31,11 +28,10 @@ class CentroController extends AbstractController
         );
 
         return $this -> render('centro/index.html.twig',[
-            'controller_name' => 'Ver Listado de Centros',
-            'pagination' => $pagination
-            //'todosLosCentros' => $allCentros
+            'controller_name' => 'Listado de Centros',
+            'pagination' => $pagination,
+            'centros' => $query
         ]);
-
     }
 
     /**
