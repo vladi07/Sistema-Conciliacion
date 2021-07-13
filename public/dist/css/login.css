@@ -4,7 +4,8 @@
 }
 
 body {
-  background-image: url("/public/dist/img/fondo-pantalla.png");
+  background: url("/dist/img/fondo-pantalla.png");
+  background-size: cover;
   /*background: linear-gradient(to right, #0062E6, #33AEFF);*/
 }
 
@@ -17,16 +18,15 @@ body {
 
 .card-signin .card-title {
   margin-bottom: 2rem;
-  font-weight: 300;
-  font-size: 1.5rem;
+  font-weight: 400;
+  font-size: 2.5rem;
 }
 
 .card-signin .card-img-left {
-  width: 45%;
   /* Link to your background image using in the property below! */
-  /*background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');*/
-  background-image: url("/public/dist/img/justicia-ver-cfondo.jpg");
-  /*background-size: cover;*/
+  background: scroll center  url("/dist/img/justicia-ver-cfondo.jpg");
+  width: 60%;
+  background-size: cover;
 }
 
 .card-signin .card-body {

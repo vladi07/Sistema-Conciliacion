@@ -3,94 +3,102 @@
 namespace App\Controller;
 
 use App\Entity\Centro;
-use App\Entity\Departamentos;
-use App\Form\CentrosType;
+use App\Form\CentroType;
+use App\Repository\CentroRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/centro")
+ */
 class CentroController extends AbstractController
 {
     /**
-     * @Route("/centro", name="Centro")
+     * @Route("/", name="centro_index", methods={"GET"})
      */
-    public function index(PaginatorInterface $paginator, Request $request): Response
+    public function index( PaginatorInterface $paginator, Request $request, CentroRepository $centroRepository): Response
     {
         $em = $this -> getDoctrine() -> getManager();
-        //Llamamos a la consulta DQL personalisado en el CENTROREPOSITORY
-        $query = $em -> getRepository(Centro::class) -> BuscarTodosCentros();
+        $query = $em-> getRepository(Centro::class) -> BuscarTodosCentros() ;
+
         $pagination = $paginator->paginate(
-            $query, /* consulta NO resultado */
+            $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            3 /*limit per page*/
+            4 /*limit per page*/
         );
 
-        return $this -> render('centro/index.html.twig',[
-            'controller_name' => 'Listado de Centros',
-            'pagination' => $pagination,
-            'centros' => $query
+        return $this->render('centro/index.html.twig', [
+            'pagination' => $pagination
         ]);
     }
 
     /**
-     * @Route("/centro/nuevo_centro", name="Nuevo_Centro")
+     * @Route("/new", name="centro_new", methods={"GET","POST"})
      */
-    public function crearCentro(Request $request): Response
+    public function new(Request $request): Response
     {
-        //Creamos el objeto CENTRO
         $centro = new Centro();
-        //Creamos el FORMULARIO
-        $form = $this -> createForm(CentrosType::class, $centro);
-        $form -> handleRequest($request);
+        $form = $this->createForm(CentroType::class, $centro);
+        $form->handleRequest($request);
 
-        if ($form -> isSubmitted() && $form -> isValid() ){
-            $em = $this-> getDoctrine() -> getManager();
-            //Asociamos los campos del form en los atributos de la entidad
-            $centro = $form -> getData();
-            $em -> persist($centro);
-            $em -> flush();
-            $this -> addFlash('success', Centro::REGISTRO_EXITOSO);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($centro);
+            $entityManager->flush();
 
-            return $this -> redirectToRoute('Centro');
+            return $this->redirectToRoute('centro_index');
         }
 
-        return $this -> render('centro/crearCentro.html.twig', [
-            'controller_name' => 'Crear Nuevo Centro de Conciliación',
-            'formulario' => $form -> createView()
-        ]);
-    }
-
-     /**
-     *@Route("/centro/{id}", name="Ver_mi_centro")
-     */
-    public function verMiCentro($id){
-        //Solo se vera un CENTRO especifico
-        $em = $this -> getDoctrine() -> getManager();
-        $centro = $em -> getRepository(Centro::class) -> find($id);
-
-        return $this -> render('centro/verCentro.html.twig',[
-            'controller_name' => 'Ver Centros Registrados',
-            'ver_centro' => $centro
+        return $this->render('centro/new.html.twig', [
+            'centro' => $centro,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/centro/mis-centros", name="Mis_centros")
+     * @Route("/{id}", name="centro_show", methods={"GET"})
      */
-    public function MisCentros(){
-        $em = $this -> getDoctrine() -> getManager();
-        //Obtenemos el usuario logeado
-        //$usuario = $this -> getUser();
-        //$mis_centros = $em -> getRepository(Centro::class) -> findBy();
-           // [
-            //'usuarios' => $usuario
-        //]
+    public function show(Centro $centro): Response
+    {
+        return $this->render('centro/show.html.twig', [
+            'centro' => $centro,
+        ]);
+    }
 
+    /**
+     * @Route("/{id}/edit", name="centro_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Centro $centro): Response
+    {
+        $form = $this->createForm(CentroType::class, $centro);
+        $form->handleRequest($request);
 
-        //return $this -> render('centro/misCentros.html.twig',[
-          //  'misCentros' => $mis_centros
-        //]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('centro_index');
+        }
+
+        return $this->render('centro/edit.html.twig', [
+            'centro' => $centro,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="centro_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Centro $centro): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$centro->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($centro);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('centro_index');
     }
 }
